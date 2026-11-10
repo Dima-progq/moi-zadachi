@@ -325,3 +325,107 @@ body.modal-open {
     align-items: center;
   }
 }
+
+/* Исправление и завершение оформления окна задачи */
+#modalOverlay {
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.modal {
+  width: 100%;
+  max-width: 540px;
+  max-height: 92dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(15, 22, 35, .25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 22px 8px;
+}
+
+#modalTitle {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+#modalClose {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  font-size: 26px;
+  border-radius: 13px;
+}
+
+#taskForm {
+  width: 100%;
+  max-height: calc(92dvh - 75px);
+  overflow-y: auto;
+  padding: 12px 22px 22px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#taskForm .field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#taskForm .field-row .field {
+  min-width: 0;
+  margin-top: 8px;
+}
+
+#taskForm .checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+#taskForm .checkbox-field input {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+}
+
+#taskForm .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#taskForm .modal-actions button {
+  min-width: 120px;
+}
+
+@media (max-width: 420px) {
+  #taskForm .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .modal-header {
+    padding: 16px 18px 6px;
+  }
+
+  #taskForm {
+    padding: 10px 18px 18px;
+  }
+}
