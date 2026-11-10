@@ -429,3 +429,52 @@ body.modal-open {
     padding: 10px 18px 18px;
   }
 }
+
+/* Исправление расположения окна задачи */
+#modalOverlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  overflow-y: auto !important;
+}
+
+#modalOverlay[hidden] {
+  display: none !important;
+}
+
+#modalOverlay .modal {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 620px !important;
+  max-height: calc(100dvh - 32px) !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+  transform: none !important;
+}
+
+#modalOverlay .modal-header {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+#modalTitle {
+  position: static !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#modalOverlay .modal-close {
+  position: static !important;
+  flex: 0 0 40px !important;
+}
