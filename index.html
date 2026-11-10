@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мои задачи</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#232C5A">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Мои задачи">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="app-title">Мои задачи</h1>
+      <p class="app-subtitle" id="appSubtitle"></p>
+    </header>
+
+    <!-- Фильтры категорий -->
+    <nav class="category-tabs" id="categoryTabs">
+      <button class="tab active" data-category="all">Все</button>
+      <button class="tab" data-category="work">Работа</button>
+      <button class="tab" data-category="home">Дом</button>
+      <button class="tab" data-category="sunday">Воскресная школа</button>
+    </nav>
+
+    <!-- Сводка -->
+    <section class="summary" id="summary"></section>
+
+    <!-- Список задач -->
+    <main class="task-list" id="taskList"></main>
+
+    <!-- Пустое состояние -->
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="empty-icon">📋</div>
+      <p class="empty-title">Задач пока нет</p>
+      <p class="empty-text">Нажмите «+», чтобы добавить первую задачу</p>
+    </div>
+
+    <!-- Кнопка добавления -->
+    <button class="fab" id="openAddBtn" aria-label="Добавить задачу">+</button>
+  </div>
+
+  <!-- Модальное окно редактирования -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Новая задача</h2>
+        <button class="modal-close" id="modalClose" aria-label="Закрыть">×</button>
+      </div>
+
+      <form id="taskForm" novalidate>
+        <label class="field">
+          <span class="field-label">Название</span>
+          <input type="text" id="taskTitle" class="input" maxlength="120" placeholder="Что нужно сделать?" required>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Описание</span>
+          <textarea id="taskDesc" class="input textarea" rows="3" maxlength="500" placeholder="Подробности (необязательно)"></textarea>
+        </label>
+
+        <div class="field">
+          <span class="field-label">Категория</span>
+          <div class="category-picker" id="categoryPicker">
+            <button type="button" class="cat-option" data-category="work">💼 Работа</button>
+            <button type="button" class="cat-option" data-category="home">🏠 Дом</button>
+            <button type="button" class="cat-option" data-category="sunday">⛪ Воскресная школа</button>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">Дата</span>
+            <input type="date" id="taskDate" class="input">
+          </label>
+          <label class="field">
+            <span class="field-label">Время</span>
+            <input type="time" id="taskTime" class="input">
+          </label>
+        </div>
+
+        <label class="checkbox-field">
+          <input type="checkbox" id="taskDone">
+          <span>Задача выполнена</span>
+        </label>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-danger" id="deleteBtn" hidden>Удалить</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js').catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>
+
