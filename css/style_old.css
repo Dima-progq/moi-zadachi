@@ -1,0 +1,480 @@
+
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --text: #202735;
+  --muted: #778195;
+  --primary: #315fba;
+  --primary-light: #eaf0ff;
+  --border: #e5e9f0;
+  --danger: #d94b4b;
+  --success: #25845a;
+  --shadow: 0 5px 20px rgba(30, 45, 75, .07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px 16px 40px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  margin: 10px 0 24px;
+  font-size: 29px;
+  font-weight: 800;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#categoryTabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.tab,
+.cat-option {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 11px 15px;
+  white-space: nowrap;
+}
+
+.tab.active,
+.cat-option.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+#summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.summary-card strong {
+  font-size: 25px;
+}
+
+.summary-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+#openAddBtn {
+  width: 100%;
+  border: 0;
+  border-radius: 13px;
+  padding: 15px;
+  margin: 4px 0 18px;
+  background: var(--primary);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+#taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: var(--shadow);
+}
+
+.task-card-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.task-check {
+  padding-top: 3px;
+}
+
+.task-check input {
+  width: 21px;
+  height: 21px;
+  accent-color: var(--success);
+}
+
+.task-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-title {
+  margin: 0;
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+
+.task-category {
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 12px;
+}
+
+.task-description {
+  margin: 9px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.overdue-label,
+.is-overdue .task-meta {
+  color: var(--danger);
+}
+
+.task-edit {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 22px;
+  padding: 5px;
+}
+
+.task-card.is-done {
+  opacity: .65;
+}
+
+.task-card.is-done .task-title {
+  text-decoration: line-through;
+}
+
+#emptyState {
+  padding: 30px 15px;
+  text-align: center;
+  color: var(--muted);
+}
+
+#emptyState[hidden],
+#modalOverlay[hidden],
+#deleteBtn[hidden] {
+  display: none !important;
+}
+
+#modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(15, 22, 35, .55);
+}
+
+#modalOverlay:not([hidden]) {
+  display: flex;
+}
+
+#modalOverlay > * {
+  max-width: 520px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+#taskForm {
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+#modalTitle {
+  margin: 0 0 20px;
+  font-size: 22px;
+}
+
+#taskForm label {
+  display: block;
+  margin: 14px 0 7px;
+  font-weight: 600;
+}
+
+#taskForm input:not([type="checkbox"]),
+#taskForm textarea,
+#taskForm select {
+  width: 100%;
+  min-height: 45px;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+#taskForm textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+#categoryPicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+#taskDone {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--success);
+}
+
+#modalClose,
+#deleteBtn,
+#taskForm button[type="submit"] {
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+#modalClose {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+#deleteBtn {
+  background: #fff0f0;
+  color: var(--danger);
+}
+
+#taskForm button[type="submit"] {
+  background: var(--primary);
+  color: white;
+}
+
+@media (min-width: 650px) {
+  body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-top: 35px;
+  }
+
+  #summary {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #modalOverlay {
+    align-items: center;
+  }
+}
+
+/* Исправление и завершение оформления окна задачи */
+#modalOverlay {
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.modal {
+  width: 100%;
+  max-width: 540px;
+  max-height: 92dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(15, 22, 35, .25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 22px 8px;
+}
+
+#modalTitle {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+#modalClose {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  font-size: 26px;
+  border-radius: 13px;
+}
+
+#taskForm {
+  width: 100%;
+  max-height: calc(92dvh - 75px);
+  overflow-y: auto;
+  padding: 12px 22px 22px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#taskForm .field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#taskForm .field-row .field {
+  min-width: 0;
+  margin-top: 8px;
+}
+
+#taskForm .checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+#taskForm .checkbox-field input {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+}
+
+#taskForm .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#taskForm .modal-actions button {
+  min-width: 120px;
+}
+
+@media (max-width: 420px) {
+  #taskForm .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .modal-header {
+    padding: 16px 18px 6px;
+  }
+
+  #taskForm {
+    padding: 10px 18px 18px;
+  }
+}
+
+/* Исправление расположения окна задачи */
+#modalOverlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  overflow-y: auto !important;
+}
+
+#modalOverlay[hidden] {
+  display: none !important;
+}
+
+#modalOverlay .modal {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 620px !important;
+  max-height: calc(100dvh - 32px) !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+  transform: none !important;
+}
+
+#modalOverlay .modal-header {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+#modalTitle {
+  position: static !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#modalOverlay .modal-close {
+  position: static !important;
+  flex: 0 0 40px !important;
+}
